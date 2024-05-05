@@ -42,15 +42,15 @@ public class FavoritesFragment extends Fragment {
         List<CartModel> cartModelList = new ArrayList<>();
         DBHelper dbHelper = new DBHelper(getContext());
 
-        Cursor cursor = dbHelper.getCart(AccountsStaticModel.getAccount_id();
+        Cursor cursor = dbHelper.getCart(AccountsStaticModel.getAccount_id());
 
         while(cursor.moveToNext())
         {
-            int cart_id = cursor.getInt(0);
-            int product_id = cursor.getInt(1);
-            String name = cursor.getString(2);
-            double price = cursor.getDouble(3);
-            int imgRID = cursor.getInt(4);
+            int cart_id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+            int product_id = cursor.getInt(cursor.getColumnIndexOrThrow("product_id"));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+            double price = cursor.getDouble(cursor.getColumnIndexOrThrow("price"));
+            int imgRID = cursor.getInt(cursor.getColumnIndexOrThrow("imgRID"));
 
             Log.d("Debugging", "Cart: " + name);
 

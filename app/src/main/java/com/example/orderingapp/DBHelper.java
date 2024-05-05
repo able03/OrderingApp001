@@ -191,11 +191,11 @@ public class DBHelper extends SQLiteOpenHelper
 
     }*/
 
-   /* public Cursor getCart(int account_id)
+    public Cursor getCart(int account_id)
     {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM "+TABLE_CART, null);
-    }*/
+    }
 
 
 
