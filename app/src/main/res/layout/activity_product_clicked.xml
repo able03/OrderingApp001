@@ -154,14 +154,14 @@
 
 
              <LinearLayout
-                 android:layout_width="wrap_content"
+                 android:layout_width="match_parent"
                  android:layout_height="wrap_content"
                  android:orientation="horizontal"
-                 android:gravity="center_vertical">
+                 android:gravity="end">
 
 
 
-                 <ImageButton
+                 <!--<ImageButton
                      android:layout_width="40dp"
                      android:layout_height="40dp"
                      android:src="@drawable/ic_minus"
@@ -179,13 +179,14 @@
                      android:layout_width="40dp"
                      android:layout_height="40dp"
                      android:src="@drawable/ic_add"
-                     android:id="@+id/ibAdd"/>
+                     android:id="@+id/ibAdd"/>-->
 
 
                  <com.google.android.material.button.MaterialButton
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      app:cornerRadius="5dp"
+                     android:id="@+id/btnClickedAddToCart"
                      app:icon="@drawable/ic_cart"
                      android:layout_marginEnd="10dp"
                      android:text="Add to cart"/>
@@ -193,6 +194,7 @@
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      app:cornerRadius="5dp"
+                     android:id="@+id/btnClickedCheckout"
                      android:text="Checkout"/>
 
              </LinearLayout>

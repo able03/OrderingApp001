@@ -1,6 +1,8 @@
 package com.example.orderingapp;
 
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,11 +18,17 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.orderingapp.fragments.FavoritesFragment;
 import com.example.orderingapp.models.ProductStaticModel;
+import com.google.android.material.button.MaterialButton;
+
+import java.util.Currency;
 
 public class ProductClickedActivity extends AppCompatActivity {
 
     TextView tv_name, tv_price, tv_desc;
     ImageView iv_back, iv_head, iv_fav, iv_favs;
+    MaterialButton btn_cart, btn_checkout;
+    DBHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +42,24 @@ public class ProductClickedActivity extends AppCompatActivity {
 
         initValues();
 
+       /* if(AccountsStaticModel.getName() == null)
+        {
+            btn_cart.setEnabled(false);
+            btn_checkout.setEnabled(false);
+        }
+        else
+        {
+            btn_cart.setEnabled(true);
+            btn_checkout.setEnabled(true);
+        }*/
 
         tv_name.setText(ProductStaticModel.getName());
         tv_price.setText(String.valueOf(ProductStaticModel.getPrice()));
         tv_desc.setText(ProductStaticModel.getDescription());
         iv_head.setImageResource(ProductStaticModel.getImgRID());
         setListener();
+
+        dbHelper.close();
 
     }
 
@@ -53,6 +73,11 @@ public class ProductClickedActivity extends AppCompatActivity {
         iv_head = findViewById(R.id.vTemp);
         iv_fav = findViewById(R.id.ivFav);
         iv_favs = findViewById(R.id.ivFav1);
+
+        btn_cart = findViewById(R.id.btnClickedAddToCart);
+        btn_checkout = findViewById(R.id.btnClickedCheckout);
+
+        dbHelper = new DBHelper(this);
 
     }
 
@@ -72,11 +97,6 @@ public class ProductClickedActivity extends AppCompatActivity {
 
                 iv_favs.setVisibility(View.VISIBLE);
 
-
-
-
-
-
             }
         });
 
@@ -88,16 +108,26 @@ public class ProductClickedActivity extends AppCompatActivity {
 
                 iv_favs.setVisibility(View.GONE);
 
-                
-
             }
         });
 
 
 
+        btn_cart.setOnClickListener(addToCart -> {
+            if(dbHelper.addCart(AccountsStaticModel.getAccount_id(), ProductStaticModel.getProduct_id(), ProductStaticModel.getName(), ProductStaticModel.getPrice(), ProductStaticModel.getImgRID()))
+            {
+                Log.d("Debugging", "add to cart success");
+                finish();
+            }
+            else
+            {
+                Log.d("Debugging", "add to cart success");
+            }
+        });
 
 
     }
+
 
     private void setFragment(Fragment fragment)
     {

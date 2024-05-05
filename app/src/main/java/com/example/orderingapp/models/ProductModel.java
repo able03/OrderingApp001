@@ -8,37 +8,51 @@ public class ProductModel
     private double price;
     private int ratings_id;
     private int imgRID;
+    private String category;
 
-    public ProductModel(int product_id, String name, String description, double price, int ratings_id, int imgRID) {
+    public ProductModel(int product_id, String name, String description, double price, int ratings_id, int imgRID, String category)
+    {
         this.product_id = product_id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.ratings_id = ratings_id;
         this.imgRID = imgRID;
+        this.category = category;
     }
 
-    public int getProduct_id() {
+    public int getProduct_id()
+    {
         return product_id;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
-    public double getPrice() {
+    public double getPrice()
+    {
         return price;
     }
 
-    public int getRatings_id() {
+    public int getRatings_id()
+    {
         return ratings_id;
     }
 
-    public int getImgRID() {
+    public int getImgRID()
+    {
         return imgRID;
+    }
+
+    public String getCategory()
+    {
+        return category;
     }
 }

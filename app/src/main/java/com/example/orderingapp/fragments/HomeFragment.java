@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -133,7 +134,7 @@ public class HomeFragment extends Fragment {
 
         rv = getView().findViewById(R.id.rvItems);
         adapter = new ProductAdapter(getContext());
-        itemList = new LoadItems();
+        itemList = new LoadItems(getContext());
 
         tv_details = getView().findViewById(R.id.tvProductDetails);
         iv_product = getView().findViewById(R.id.ivDetailsIcon);
@@ -146,7 +147,7 @@ public class HomeFragment extends Fragment {
         sv = getView().findViewById(R.id.searchView);
         sv.clearFocus();
 
-        mainSearchList = itemList.getAll();
+        mainSearchList = itemList.getAllList();
         tv_items_detail = getView().findViewById(R.id.tvItemsLabel);
 
         btn_buy = getView().findViewById(R.id.btnBuy);
@@ -164,19 +165,12 @@ public class HomeFragment extends Fragment {
 
     private void populateRV()
     {
-        rvList = itemList.getAll();
+        rvList = itemList.getAllList();
         adapter.setProductList(rvList);
         rv.setAdapter(adapter);
         tv_items_detail.setText("Items");
         rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
     }
-
-    private void clearRVList()
-    {
-        rvList.clear();
-        adapter.setProductList(rvList);
-    }
-
 
 
     private void setListener()
@@ -197,17 +191,20 @@ public class HomeFragment extends Fragment {
                 String desc = productModel.getDescription();
                 double price = productModel.getPrice();
                 int ratings = productModel.getRatings_id();
+                String category = productModel.getCategory();
 
                 iv_product.setVisibility(View.VISIBLE);
                 tv_details.setVisibility(View.VISIBLE);
                 btn_buy.setVisibility(View.VISIBLE);
                 fl.setVisibility(View.VISIBLE);
 
-                iv_product.setImageResource(imgRID);
+                iv_product.setImageResource(Integer.valueOf(imgRID));
                 tv_details.setText(desc);
 
+                int i = R.drawable.elec_sony;
+                Log.d("Debugging", String.valueOf(i));
 
-                new ProductStaticModel(id, name, desc, price, ratings, imgRID);
+                new ProductStaticModel(id, name, desc, price, ratings, Integer.valueOf(imgRID), category);
 
 
             }
